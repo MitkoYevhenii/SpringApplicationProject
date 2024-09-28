@@ -24,16 +24,30 @@ repositories {
 }
 
 dependencies {
+
+    // Spring Boot dependencies
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+
+    // Database migrations from Flyway
     implementation("org.flywaydb:flyway-core")
+
+    // Lombok to simplify code writing
     compileOnly("org.projectlombok:lombok")
-    runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
+
+    // H2 database for testing
+    runtimeOnly("com.h2database:h2")
+
+    // Зависимости для тестирования
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // https://mvnrepository.com/artifact/net.datafaker/datafaker
+    // DataFaker library for random data generation
     implementation("net.datafaker:datafaker:2.3.1")
 }
 
