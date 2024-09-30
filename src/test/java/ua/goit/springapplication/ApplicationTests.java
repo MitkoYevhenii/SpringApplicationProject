@@ -3,9 +3,9 @@ package ua.goit.springapplication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import ua.goit.entity.FakeNoteGenerator;
-import ua.goit.entity.Note;
-import ua.goit.entity.NoteService;
+import ua.goit.note.FakeNoteGenerator;
+import ua.goit.note.Note;
+import ua.goit.note.NoteService;
 
 import java.util.NoSuchElementException;
 
@@ -46,5 +46,11 @@ class ApplicationTests {
         noteService.deleteById(id);
         assertThrows(NoSuchElementException.class, () -> noteService.getById(id));
     }
+
+//    @Test
+//    void getUTCIdTest() {
+//        System.out.println(TimezoneUtils.getUTCId());
+//        assertEquals(TimezoneUtils.getUTCId(), 3);
+//    }
 }
 

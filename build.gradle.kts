@@ -49,6 +49,10 @@ dependencies {
 
     // DataFaker library for random data generation
     implementation("net.datafaker:datafaker:2.3.1")
+
+    // https://mvnrepository.com/artifact/com.maxmind.geoip2/geoip2
+    implementation("com.maxmind.geoip2:geoip2:4.2.1")
+
 }
 
 tasks.withType<Test> {

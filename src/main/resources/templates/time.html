@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div><h1>Current time: <span th:text="${time}">12:00</span></h1></div>
+</body>
+</html>
