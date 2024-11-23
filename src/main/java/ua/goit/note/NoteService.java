@@ -1,59 +1,56 @@
 package ua.goit.note;
 
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
-@Data
 public class NoteService {
-    private final Map<Long, Note> notes = new ConcurrentHashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(0);
 
+    private final NoteRepository noteRepository;
+
+    @Autowired
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     public List<Note> getListAll() {
-        return new ArrayList<>(notes.values());
+        return noteRepository.findAll();
     }
 
     public Note add(Note note) {
-        long id = idGenerator.incrementAndGet();
-        note.setId(id);
-        notes.put(id, note);
-        return note;
+        return noteRepository.save(note);
     }
 
     public void deleteById(long id) {
-        if (!notes.containsKey(id)) {
+        if (!noteRepository.existsById(id)) {
             throw new NoSuchElementException("Note with id " + id + " not found");
         }
-
-        notes.remove(id);
+        noteRepository.deleteById(id);
     }
 
     public void update(Note note) {
-        if (!notes.containsKey(note.getId())) {
+        if (!noteRepository.existsById(note.getId())) {
             throw new NoSuchElementException("Note with id " + note.getId() + " not found");
         }
-
-        notes.put(note.getId(), note);
+        noteRepository.save(note);
     }
 
     public Note getById(long id) {
-        Note note = notes.get(id);
-        if (note == null) {
-            throw new NoSuchElementException("Note with id " + id + " not found");
-        }
-        return note;
+        return noteRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Note with id " + id + " not found"));
     }
 
-    public long getLastId() {
-        if (idGenerator == null) {
-            throw new RuntimeException("No id identificator");
-        }
-        return idGenerator.get();
+    // Новый метод для получения последнего ID
+    public Long getLastId() {
+        return noteRepository.findTopByOrderByIdDesc()
+                .map(Note::getId)
+                .orElseThrow(() -> new NoSuchElementException("No notes found in the database"));
     }
 }
+
+
+
+

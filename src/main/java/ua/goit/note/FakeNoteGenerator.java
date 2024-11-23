@@ -1,22 +1,18 @@
 package ua.goit.note;
 
 import net.datafaker.Faker;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FakeNoteGenerator {
 
-    public Note fakeNote(long id) {
-        Faker faker = new Faker();
+    private final Faker faker = new Faker();
+
+    public Note generateFakeNote() {
         Note note = new Note();
-
-        // Встановлюємо ID
-        note.setId(id);
-
-        // Генеруємо випадковий заголовок (наприклад, з 5 слів)
-        note.setTitle(faker.lorem().sentence(5));
-
-        // Генеруємо випадковий контент (наприклад, з 3 абзаців)
-        note.setContent(faker.lorem().paragraph(3));
-
+        note.setTitle(faker.lorem().sentence(5)); // Случайный заголовок из 5 слов
+        note.setContent(faker.lorem().paragraph(3)); // Случайный контент из 3 абзацев
         return note;
     }
 }
+
