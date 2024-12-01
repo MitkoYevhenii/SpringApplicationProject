@@ -32,6 +32,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+
 
 
 
@@ -54,6 +56,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.maxmind.geoip2/geoip2
     implementation("com.maxmind.geoip2:geoip2:4.2.1")
+
+
+    implementation("com.auth0:java-jwt:4.4.0")
+
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 
 }
 
